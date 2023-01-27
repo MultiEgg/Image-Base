@@ -8,3 +8,12 @@ RUN   apt update \
       && apt-get clean autoclean \
       && apt-get autoremove --yes \
       && rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+RUN wget https://github.com/busyloop/lolcat/archive/master.zip
+RUN unzip master.zip
+RUN cd lolcat-master/bin
+RUN gem install lolcat
+
+## configure locale
+RUN   update-locale lang=en_US.UTF-8 \
+      &&   dpkg-reconfigure --frontend noninteractive locales
