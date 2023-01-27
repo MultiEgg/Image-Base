@@ -40,6 +40,6 @@ jobs:
       - name: Trigger Main Image Build
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.REGISTRY_TOKEN }}
           repository: multiegg/image
           event-type: base-image-built
