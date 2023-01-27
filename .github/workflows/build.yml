@@ -1,12 +1,12 @@
-name: image:dev Builder
+name: image:base Builder
 on:
   push:
     branches:
-      - dev
+      - main
       
 jobs:
   push:
-    name: "image:dev"
+    name: "image:base"
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.head_commit.message, '!norun') }}
     strategy:
