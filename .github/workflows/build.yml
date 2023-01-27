@@ -33,3 +33,13 @@ jobs:
           push: true
           tags: |
              ghcr.io/multiegg/image:base
+  dispatch:
+    needs: push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Main Image Build
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT }}
+          repository: multiegg/image
+          event-type: base-image-built
