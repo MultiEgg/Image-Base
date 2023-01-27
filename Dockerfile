@@ -10,20 +10,23 @@ RUN   apt update \
       && apt-get autoremove --yes \
       && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
-RUN wget https://github.com/busyloop/lolcat/archive/master.zip
-RUN unzip master.zip
-RUN cd lolcat-master/bin
-RUN gem install lolcat
+RUN wget https://github.com/busyloop/lolcat/archive/master.zip \
+    && unzip master.zip \
+    && cd lolcat-master/bin \
+    && gem install lolcat \
+    && cd ../..
 
-RUN cd ../..
 
-RUN git clone https://github.com/neurobin/shc.git
-RUN cd shc
-RUN git checkout 4.0.3
-RUN ./autogen.sh
-RUN ./configure
-RUN make
-RUN make install
+RUN mkdir shc \ 
+    && cd shc \
+    && curl -s "https://api.multiegg.xyz/global/shc-4.0.3.zip" \
+    && unzip shc-4.0.3.zip \
+    && cd shc-4.0.3 \
+    && chmod +x *.sh \
+    && ./autogen.sh \
+    && ./configure \
+    && make \
+    && make install
 
 ## configure locale
 RUN   update-locale lang=en_US.UTF-8 \
