@@ -15,7 +15,10 @@ RUN unzip master.zip
 RUN cd lolcat-master/bin
 RUN gem install lolcat
 
+RUN cd ../..
+
 RUN git clone https://github.com/neurobin/shc.git
+RUN cd shc
 RUN git checkout 4.0.3
 RUN ./autogen.sh
 RUN ./configure
